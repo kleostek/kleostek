@@ -21,10 +21,9 @@ const translations = {
       cta1: "Explore Our Services",
       cta2: "Get in Touch",
       stats: [
-        { value: "50+", label: "Projects Ready" },
-        { value: "15+", label: "Technologies" },
-        { value: "99%", label: "Client Satisfaction" },
-        { value: "24/7", label: "Uptime Guaranteed" },
+        { value: "6", label: "Services" },
+        { value: "2", label: "Languages" },
+        { value: "100%", label: "Dedication" },
       ],
     },
     about: {
@@ -36,17 +35,17 @@ const translations = {
         {
           title: "Our Mission",
           description:
-            "To democratize access to cutting-edge technology by delivering world-class software solutions that drive growth, efficiency, and digital transformation.",
+            "To create practical, effective software solutions that help businesses grow and succeed in the digital world.",
         },
         {
           title: "Our Vision",
           description:
-            "To become the global standard for software engineering excellence, shaping how businesses interact with technology.",
+            "To be a trusted partner in technology, known for delivering real results and transparent communication.",
         },
         {
           title: "Our Values",
           description:
-            "Innovation, integrity, and impact drive everything we do. We believe in pushing boundaries while maintaining the highest standards of quality.",
+            "Transparency, excellence, and passion. We're honest about what we can do and committed to delivering on every promise.",
         },
       ],
     },
@@ -98,7 +97,7 @@ const translations = {
       tag: "Our Capabilities",
       title: "What We Build",
       subtitle:
-        "Explore our capabilities and the types of transformative solutions we deliver to businesses across industries.",
+        "These are demo projects showcasing our expertise across key areas. We're actively building real-world solutions—let's build yours.",
       items: [
         {
           title: "Enterprise Analytics Platform",
@@ -106,6 +105,7 @@ const translations = {
           description:
             "Real-time data visualization and predictive analytics platform powered by machine learning algorithms.",
           gradient: 1,
+          isDemo: true,
         },
         {
           title: "Cloud Migration Suite",
@@ -113,6 +113,7 @@ const translations = {
           description:
             "End-to-end cloud migration toolkit with automated assessment, planning, and deployment capabilities.",
           gradient: 2,
+          isDemo: true,
         },
         {
           title: "FinTech Mobile App",
@@ -120,6 +121,7 @@ const translations = {
           description:
             "Secure, intuitive mobile banking application with real-time transactions and biometric authentication.",
           gradient: 3,
+          isDemo: true,
         },
         {
           title: "Smart ERP System",
@@ -127,6 +129,7 @@ const translations = {
           description:
             "Modular enterprise resource planning system with AI-powered workflow automation and insights.",
           gradient: 4,
+          isDemo: true,
         },
       ],
     },
@@ -145,9 +148,9 @@ const translations = {
         success: "Message sent successfully! We'll get back to you soon.",
       },
       info: {
-        email: "hello@kleostek.com",
+        email: "kleostek@gmail.com",
         location: "Global · Remote-First",
-        availability: "Available 24/7",
+        availability: "Responsive support",
       },
     },
     footer: {
@@ -175,10 +178,9 @@ const translations = {
       cta1: "Explorar Servicios",
       cta2: "Contáctanos",
       stats: [
-        { value: "50+", label: "Proyectos Listos" },
-        { value: "15+", label: "Tecnologías" },
-        { value: "99%", label: "Satisfacción" },
-        { value: "24/7", label: "Disponibilidad" },
+        { value: "6", label: "Servicios" },
+        { value: "2", label: "Idiomas" },
+        { value: "100%", label: "Dedicación" },
       ],
     },
     about: {
@@ -190,17 +192,17 @@ const translations = {
         {
           title: "Nuestra Misión",
           description:
-            "Democratizar el acceso a tecnología de punta ofreciendo soluciones de software de clase mundial que impulsan el crecimiento y la transformación digital.",
+            "Crear soluciones de software prácticas y efectivas que ayuden a empresas a crecer y prosperar en el mundo digital.",
         },
         {
           title: "Nuestra Visión",
           description:
-            "Convertirnos en el estándar global de excelencia en ingeniería de software, moldeando cómo las empresas interactúan con la tecnología.",
+            "Ser un socio confiable en tecnología, reconocido por entregar resultados reales y comunicación transparente.",
         },
         {
           title: "Nuestros Valores",
           description:
-            "Innovación, integridad e impacto impulsan todo lo que hacemos. Creemos en superar límites manteniendo los más altos estándares de calidad.",
+            "Transparencia, excelencia y pasión. Somos honestos sobre lo que podemos hacer y nos comprometemos a cumplir cada promesa.",
         },
       ],
     },
@@ -252,7 +254,7 @@ const translations = {
       tag: "Nuestras Capacidades",
       title: "Lo Que Construimos",
       subtitle:
-        "Explora nuestras capacidades y los tipos de soluciones transformadoras que entregamos a empresas de diversas industrias.",
+        "Estos son proyectos de demo que muestran nuestra experiencia en áreas clave. Estamos construyendo soluciones en el mundo real—construyamos la tuya.",
       items: [
         {
           title: "Plataforma de Analítica Empresarial",
@@ -260,6 +262,7 @@ const translations = {
           description:
             "Plataforma de visualización de datos en tiempo real y analítica predictiva impulsada por machine learning.",
           gradient: 1,
+          isDemo: true,
         },
         {
           title: "Suite de Migración Cloud",
@@ -267,6 +270,7 @@ const translations = {
           description:
             "Kit de herramientas de migración cloud integral con evaluación automatizada y despliegue.",
           gradient: 2,
+          isDemo: true,
         },
         {
           title: "App Móvil FinTech",
@@ -274,6 +278,7 @@ const translations = {
           description:
             "Aplicación de banca móvil segura e intuitiva con transacciones en tiempo real y autenticación biométrica.",
           gradient: 3,
+          isDemo: true,
         },
         {
           title: "Sistema ERP Inteligente",
@@ -281,6 +286,7 @@ const translations = {
           description:
             "Sistema modular de planificación de recursos con automatización de flujos impulsada por IA.",
           gradient: 4,
+          isDemo: true,
         },
       ],
     },
@@ -299,9 +305,9 @@ const translations = {
         success: "¡Mensaje enviado con éxito! Te responderemos pronto.",
       },
       info: {
-        email: "hello@kleostek.com",
+        email: "kleostek@gmail.com",
         location: "Global · Remote-First",
-        availability: "Disponible 24/7",
+        availability: "Soporte responsivo",
       },
     },
     footer: {

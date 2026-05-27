@@ -104,6 +104,13 @@ export default function Portfolio() {
                     {item.category}
                   </div>
 
+                  {/* Demo badge */}
+                  {item.isDemo && (
+                    <div className="absolute top-4 right-4 px-2 py-1 text-xs font-semibold text-amber-100 bg-amber-600/40 backdrop-blur-sm rounded-full border border-amber-400/30">
+                      Demo
+                    </div>
+                  )}
+
                   {/* Hover overlay */}
                   <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>

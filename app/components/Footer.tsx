@@ -96,14 +96,14 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:hello@kleostek.com"
+                  href={`mailto:${t.contact.info.email}`}
                   className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300 flex items-center gap-2"
                 >
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="2" y="4" width="20" height="16" rx="2" />
                     <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
                   </svg>
-                  hello@kleostek.com
+                  {t.contact.info.email}
                 </a>
               </li>
             </ul>

@@ -165,7 +165,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">Email</p>
-                  <a href="mailto:hello@kleostek.com" className="text-foreground font-medium hover:text-primary transition-colors">
+                  <a href={`mailto:${t.contact.info.email}`} className="text-foreground font-medium hover:text-primary transition-colors">
                     {t.contact.info.email}
                   </a>
                 </div>
