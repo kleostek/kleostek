@@ -42,7 +42,7 @@ const decorativePatterns = [
 ];
 
 export default function Portfolio() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const { ref: headerRef, isVisible: headerVisible } = useInView();
   const { ref: gridRef, isVisible: gridVisible } = useInView();
 
@@ -126,7 +126,7 @@ export default function Portfolio() {
 
                   {/* View project link */}
                   <div className="mt-5 flex items-center gap-2 text-primary text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-                    <span>{t.portfolio.tag === "Our Capabilities" ? "View Details" : "Ver Detalles"}</span>
+                    <span>{lang === "en" ? "View Details" : "Ver Detalles"}</span>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M7 17l9.2-9.2M17 17V7.8H7.8" />
                     </svg>

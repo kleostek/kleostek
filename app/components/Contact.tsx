@@ -5,7 +5,7 @@ import { useLanguage } from "./LanguageContext";
 import { useInView } from "./useInView";
 
 export default function Contact() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const { ref: headerRef, isVisible: headerVisible } = useInView();
   const { ref: contentRef, isVisible: contentVisible } = useInView();
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
@@ -184,7 +184,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">
-                    {t.contact.tag === "Get In Touch" ? "Location" : "Ubicación"}
+                    {lang === "en" ? "Location" : "Ubicación"}
                   </p>
                   <p className="text-foreground font-medium">
                     {t.contact.info.location}
@@ -204,7 +204,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">
-                    {t.contact.tag === "Get In Touch" ? "Availability" : "Disponibilidad"}
+                    {lang === "en" ? "Availability" : "Disponibilidad"}
                   </p>
                   <p className="text-foreground font-medium flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />

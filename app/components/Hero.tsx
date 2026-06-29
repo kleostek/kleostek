@@ -63,7 +63,7 @@ function AnimatedCounter({ target, suffix = "" }: { target: string; suffix?: str
 }
 
 export default function Hero() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -126,7 +126,7 @@ export default function Hero() {
           <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-8 rounded-full border border-primary/20 bg-primary/5 text-primary text-sm font-medium">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
             <span className="font-mono text-xs tracking-wider uppercase">
-              {t.hero.title1 === "Where Innovation"
+              {lang === "en"
                 ? "Next-Gen Software Engineering"
                 : "Ingeniería de Software de Nueva Generación"}
             </span>

@@ -46,7 +46,7 @@ const serviceIcons: Record<string, React.ReactNode> = {
 };
 
 export default function Services() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const { ref: headerRef, isVisible: headerVisible } = useInView();
   const { ref: gridRef, isVisible: gridVisible } = useInView();
 
@@ -111,7 +111,7 @@ export default function Services() {
 
               {/* Arrow indicator */}
               <div className="relative z-10 mt-6 flex items-center gap-2 text-primary text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-[-10px] group-hover:translate-x-0">
-                <span>{t.services.tag === "What We Do" ? "Learn more" : "Saber más"}</span>
+                <span>{lang === "en" ? "Learn more" : "Saber más"}</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14" />
                   <path d="m12 5 7 7-7 7" />
