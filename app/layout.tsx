@@ -30,6 +30,11 @@ export const metadata: Metadata = {
     "Kleostek",
   ],
   authors: [{ name: "Kleostek" }],
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
   verification: {
     google: "TahV2m4-GRWZ57aMoqSFWFxkvZKnVxhBL83wtENkYzQ",
   },
