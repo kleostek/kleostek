@@ -14,38 +14,39 @@ const translations = {
       contact: "Contact",
     },
     hero: {
-      title1: "Where Innovation",
-      title2: "Meets Execution",
+      title1: "Your business deserves",
+      title2: "software that works the way you do.",
       subtitle:
-        "We engineer cutting-edge software solutions that transform businesses and redefine what's possible in the digital landscape.",
-      cta1: "Explore Our Services",
-      cta2: "Get in Touch",
+        "At Kleostek we develop custom web applications, integrations, and automations for companies ready to leave manual processes behind. We work with agility, transparency, and a focus on real results.",
+      cta1: "Let's talk about your project",
+      cta2: "Explore our services",
       stats: [
-        { value: "6", label: "Services" },
-        { value: "2", label: "Languages" },
-        { value: "100%", label: "Dedication" },
+        { value: "6", label: "Specialized services" },
+        { value: "Modern", label: "Tech stack" },
+        { value: "Agro", label: "Logistics & more" },
+        { value: "Flexible", label: "Availability" },
       ],
     },
     about: {
-      tag: "About Us",
-      title: "Building the Future of Technology",
+      tag: "About Kleostek",
+      title: "About Kleostek",
       description:
-        "Kleostek is a next-generation software company born from a passion for technology and a relentless drive for innovation. We bring together elite engineering talent to deliver transformative digital solutions that empower businesses worldwide.",
+        "We are a growing software development company, founded with the purpose of bringing technology closer to the Colombian businesses that need it most. We believe well-built software transforms the way teams work — and that is exactly our commitment to every client.",
       cards: [
         {
           title: "Our Mission",
           description:
-            "To create practical, effective software solutions that help businesses grow and succeed in the digital world.",
+            "To develop tailored digital solutions that solve real problems, with honesty, technical quality, and a focus on business impact for our clients.",
         },
         {
           title: "Our Vision",
           description:
-            "To be a trusted partner in technology, known for delivering real results and transparent communication.",
+            "To become the go-to technology partner for Colombian SMEs looking to digitize their operations without relying on generic, one-size-fits-all solutions.",
         },
         {
           title: "Our Values",
           description:
-            "Transparency, excellence, and passion. We're honest about what we can do and committed to delivering on every promise.",
+            "Honesty — we deliver what we promise. Technical quality — clean code and scalable solutions. Results-driven — our client's success is our success.",
         },
       ],
     },
@@ -53,51 +54,51 @@ const translations = {
       tag: "What We Do",
       title: "Our Services",
       subtitle:
-        "From concept to deployment, we deliver end-to-end technology solutions tailored to your unique business needs.",
+        "Technology solutions designed for your company's real needs.",
       items: [
         {
-          title: "Custom Software",
+          title: "Custom Web Applications",
           description:
-            "Tailored solutions designed to solve your most complex business challenges with precision and scalability.",
+            "We build internal portals, dashboards, and management systems tailored exactly to your processes. No templates, no unnecessary features.",
           icon: "code",
+        },
+        {
+          title: "Integrations & Automations",
+          description:
+            "We connect the systems that don't talk to each other today. WhatsApp, ERPs, spreadsheets, APIs — all integrated so your team stops doing repetitive manual work.",
+          icon: "cloud",
+        },
+        {
+          title: "Process Digitization",
+          description:
+            "We take the processes that currently live on paper, Excel, or WhatsApp messages and turn them into usable, traceable, and scalable applications.",
+          icon: "device",
         },
         {
           title: "SaaS Products",
           description:
-            "Cloud-native applications built for performance, security, and seamless user experience at scale.",
-          icon: "cloud",
-        },
-        {
-          title: "Web & Mobile",
-          description:
-            "Stunning, responsive digital experiences that engage users and drive conversions across all platforms.",
-          icon: "device",
-        },
-        {
-          title: "AI & Machine Learning",
-          description:
-            "Intelligent systems that learn, adapt, and deliver actionable insights to give you a competitive edge.",
+            "We design and develop software-as-a-service products from architecture to deployment, ready to scale with your business.",
           icon: "brain",
         },
         {
           title: "Cloud Infrastructure",
           description:
-            "Robust, scalable cloud architectures that ensure reliability, security, and optimal performance.",
+            "We set up, migrate, and optimize cloud infrastructure so your software is fast, secure, and available when you need it.",
           icon: "server",
         },
         {
-          title: "Tech Consulting",
+          title: "Technology Consulting",
           description:
-            "Strategic guidance to navigate digital transformation and make technology decisions with confidence.",
+            "If you're not sure where to start your digital transformation, we help you define the path: what to build, in what order, and with what budget.",
           icon: "lightbulb",
         },
       ],
     },
     portfolio: {
-      tag: "Our Capabilities",
-      title: "What We Build",
+      tag: "Reference Projects",
+      title: "Reference Projects",
       subtitle:
-        "These are demo projects showcasing our expertise across key areas. We're actively building real-world solutions—let's build yours.",
+        "We are building our portfolio. The following projects are illustrative examples of the solutions we develop. Contact us to learn how we can apply them to your business.",
       items: [
         {
           title: "Enterprise Analytics Platform",
@@ -134,23 +135,23 @@ const translations = {
       ],
     },
     contact: {
-      tag: "Get In Touch",
-      title: "Let's Build Something Amazing",
+      tag: "Let's Talk About Your Project",
+      title: "Let's Talk About Your Project",
       subtitle:
-        "Ready to transform your business with technology? We'd love to hear about your project.",
+        "Tell us about the problem you want to solve. We'll get back to you within 24 hours.",
       form: {
-        name: "Full Name",
-        email: "Email Address",
+        name: "Full name",
+        email: "Email address",
         subject: "Subject",
-        message: "Your Message",
-        submit: "Send Message",
+        message: "Tell us about your project or the problem you want to solve",
+        submit: "Send message",
         sending: "Sending...",
         success: "Message sent successfully! We'll get back to you soon.",
       },
       info: {
         email: "kleostek@gmail.com",
         location: "Global · Remote-First",
-        availability: "Responsive support",
+        availability: "We respond within 24 hours",
       },
     },
     footer: {
@@ -171,38 +172,39 @@ const translations = {
       contact: "Contacto",
     },
     hero: {
-      title1: "Donde la Innovación",
-      title2: "se Encuentra con la Ejecución",
+      title1: "Su empresa merece",
+      title2: "software que funcione como usted trabaja.",
       subtitle:
-        "Diseñamos soluciones de software de vanguardia que transforman negocios y redefinen lo posible en el panorama digital.",
-      cta1: "Explorar Servicios",
-      cta2: "Contáctanos",
+        "En Kleostek desarrollamos aplicaciones web, integraciones y automatizaciones a medida para empresas que buscan dejar atrás los procesos manuales. Trabajamos con agilidad, transparencia y enfoque en resultados reales.",
+      cta1: "Hablemos de su proyecto",
+      cta2: "Ver nuestros servicios",
       stats: [
-        { value: "6", label: "Servicios" },
-        { value: "2", label: "Idiomas" },
-        { value: "100%", label: "Dedicación" },
+        { value: "6", label: "Servicios especializados" },
+        { value: "Stack", label: "Tecnológico moderno" },
+        { value: "Agro",label: "Logística y más" },
+        { value: "Flexible", label: "Disponibilidad" },
       ],
     },
     about: {
-      tag: "Sobre Nosotros",
-      title: "Construyendo el Futuro de la Tecnología",
+      tag: "Sobre Kleostek",
+      title: "Sobre Kleostek",
       description:
-        "Kleostek es una empresa de software de nueva generación nacida de la pasión por la tecnología y un impulso incansable por la innovación. Reunimos talento de ingeniería de élite para ofrecer soluciones digitales transformadoras.",
+        "Somos una empresa de desarrollo de software en crecimiento, fundada con el propósito de acercar la tecnología a las empresas colombianas que más la necesitan. Creemos que el software bien construido transforma la forma en que los equipos trabajan — y ese es exactamente nuestro compromiso con cada cliente.",
       cards: [
         {
           title: "Nuestra Misión",
           description:
-            "Crear soluciones de software prácticas y efectivas que ayuden a empresas a crecer y prosperar en el mundo digital.",
+            "Desarrollar soluciones digitales a medida que resuelvan problemas reales, con honestidad, calidad técnica y enfoque en el impacto para el negocio del cliente.",
         },
         {
           title: "Nuestra Visión",
           description:
-            "Ser un socio confiable en tecnología, reconocido por entregar resultados reales y comunicación transparente.",
+            "Ser el aliado tecnológico de referencia para las pymes colombianas que buscan digitalizar su operación sin depender de soluciones genéricas.",
         },
         {
           title: "Nuestros Valores",
           description:
-            "Transparencia, excelencia y pasión. Somos honestos sobre lo que podemos hacer y nos comprometemos a cumplir cada promesa.",
+            "Honestidad — entregamos lo que prometemos. Calidad técnica — código limpio y soluciones que escalan. Enfoque en resultados — el éxito del cliente es nuestro éxito.",
         },
       ],
     },
@@ -210,51 +212,51 @@ const translations = {
       tag: "Lo Que Hacemos",
       title: "Nuestros Servicios",
       subtitle:
-        "Desde el concepto hasta el despliegue, ofrecemos soluciones tecnológicas integrales adaptadas a las necesidades de tu negocio.",
+        "Soluciones tecnológicas diseñadas para las necesidades reales de su empresa.",
       items: [
         {
-          title: "Software a Medida",
+          title: "Aplicaciones Web a Medida",
           description:
-            "Soluciones personalizadas para resolver los desafíos más complejos de tu negocio con precisión y escalabilidad.",
+            "Desarrollamos portales internos, dashboards y sistemas de gestión adaptados exactamente a sus procesos. Sin moldes, sin funciones que no necesita.",
           icon: "code",
+        },
+        {
+          title: "Integraciones y Automatizaciones",
+          description:
+            "Conectamos los sistemas que hoy no se comunican entre sí. WhatsApp, ERPs, hojas de cálculo, APIs — todo integrado para que su equipo deje de hacer trabajo manual repetitivo.",
+          icon: "cloud",
+        },
+        {
+          title: "Digitalización de Procesos",
+          description:
+            "Tomamos los procesos que hoy viven en papel, Excel o mensajes de WhatsApp y los convertimos en aplicaciones usables, trazables y escalables.",
+          icon: "device",
         },
         {
           title: "Productos SaaS",
           description:
-            "Aplicaciones nativas en la nube construidas para rendimiento, seguridad y experiencia de usuario fluida a escala.",
-          icon: "cloud",
-        },
-        {
-          title: "Web y Móvil",
-          description:
-            "Experiencias digitales impresionantes y responsivas que cautivan usuarios en todas las plataformas.",
-          icon: "device",
-        },
-        {
-          title: "IA y Machine Learning",
-          description:
-            "Sistemas inteligentes que aprenden, se adaptan y ofrecen información accionable para tu ventaja competitiva.",
+            "Diseñamos y desarrollamos productos de software como servicio desde la arquitectura hasta el despliegue, listos para escalar con su negocio.",
           icon: "brain",
         },
         {
-          title: "Infraestructura Cloud",
+          title: "Infraestructura en la Nube",
           description:
-            "Arquitecturas cloud robustas y escalables que aseguran confiabilidad, seguridad y rendimiento óptimo.",
+            "Configuramos, migramos y optimizamos infraestructura cloud para que su software sea rápido, seguro y disponible cuando lo necesite.",
           icon: "server",
         },
         {
-          title: "Consultoría Tech",
+          title: "Consultoría Tecnológica",
           description:
-            "Orientación estratégica para navegar la transformación digital y tomar decisiones tecnológicas con confianza.",
+            "Si no sabe por dónde empezar su transformación digital, nosotros le ayudamos a definir el camino: qué construir, en qué orden y con qué presupuesto.",
           icon: "lightbulb",
         },
       ],
     },
     portfolio: {
-      tag: "Nuestras Capacidades",
-      title: "Lo Que Construimos",
+      tag: "Proyectos de Referencia",
+      title: "Proyectos de Referencia",
       subtitle:
-        "Estos son proyectos de demo que muestran nuestra experiencia en áreas clave. Estamos construyendo soluciones en el mundo real—construyamos la tuya.",
+        "Estamos construyendo nuestro portafolio. Los siguientes proyectos son ejemplos ilustrativos de las soluciones que desarrollamos. Contáctenos para conocer cómo podemos aplicarlos a su empresa.",
       items: [
         {
           title: "Plataforma de Analítica Empresarial",
@@ -291,23 +293,23 @@ const translations = {
       ],
     },
     contact: {
-      tag: "Contáctanos",
-      title: "Construyamos Algo Increíble",
+      tag: "Hablemos de su Proyecto",
+      title: "Hablemos de su Proyecto",
       subtitle:
-        "¿Listo para transformar tu negocio con tecnología? Nos encantaría conocer tu proyecto.",
+        "Cuéntenos el problema que quiere resolver. Le respondemos en menos de 24 horas.",
       form: {
-        name: "Nombre Completo",
-        email: "Correo Electrónico",
+        name: "Nombre completo",
+        email: "Correo electrónico",
         subject: "Asunto",
-        message: "Tu Mensaje",
-        submit: "Enviar Mensaje",
+        message: "Cuéntenos sobre su proyecto o el problema que quiere resolver",
+        submit: "Enviar mensaje",
         sending: "Enviando...",
         success: "¡Mensaje enviado con éxito! Te responderemos pronto.",
       },
       info: {
         email: "kleostek@gmail.com",
         location: "Global · Remote-First",
-        availability: "Soporte responsivo",
+        availability: "Respondemos en menos de 24 horas",
       },
     },
     footer: {

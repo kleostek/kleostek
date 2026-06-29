@@ -30,6 +30,9 @@ export const metadata: Metadata = {
     "Kleostek",
   ],
   authors: [{ name: "Kleostek" }],
+  verification: {
+    google: "TahV2m4-GRWZ57aMoqSFWFxkvZKnVxhBL83wtENkYzQ",
+  },
   openGraph: {
     title: "Kleostek — Next-Gen Software Engineering",
     description:
