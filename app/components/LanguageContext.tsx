@@ -21,7 +21,7 @@ const translations = {
       cta1: "Let's talk about your project",
       cta2: "Explore our services",
       stats: [
-        { value: "6", label: "Specialized services" },
+        { value: "6+", label: "Specialized services" },
         { value: "Modern", label: "Tech stack" },
         { value: "Agro", label: "Logistics & more" },
         { value: "Flexible", label: "Availability" },
@@ -180,9 +180,9 @@ const translations = {
       cta1: "Hablemos de su proyecto",
       cta2: "Ver nuestros servicios",
       stats: [
-        { value: "6", label: "Servicios especializados" },
-        { value: "Stack", label: "Tecnológico moderno" },
-        { value: "Agro",label: "Logística y más" },
+        { value: "6+", label: "Servicios especializados" },
+        { value: "Moderno", label: "Stack tecnológico" },
+        { value: "Agro", label: "Logística y más" },
         { value: "Flexible", label: "Disponibilidad" },
       ],
     },

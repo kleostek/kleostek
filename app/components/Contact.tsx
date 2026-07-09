@@ -36,6 +36,14 @@ export default function Contact() {
   const [message, setMessage] = useState("");
   const [isListening, setIsListening] = useState(false);
   const [voiceError, setVoiceError] = useState("");
+  const [submitError, setSubmitError] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    honey: "",
+  });
   const recognitionRef = useRef<SpeechRecognitionLike | null>(null);
 
   useEffect(() => {
@@ -98,21 +106,74 @@ export default function Contact() {
     };
   }, []);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!consentAccepted) {
       setConsentError(true);
+      setSubmitError("");
+      return;
+    }
+
+    if (formData.honey) {
+      setSubmitError("Solicitud inválida.");
+      return;
+    }
+
+    const trimmedName = formData.name.trim();
+    const trimmedEmail = formData.email.trim();
+    const trimmedPhone = formData.phone.trim();
+    const trimmedSubject = formData.subject.trim();
+    const trimmedMessage = message.trim();
+
+    if (!trimmedName || !trimmedEmail || !trimmedPhone || !trimmedSubject || !trimmedMessage) {
+      setSubmitError("Por favor completa todos los campos obligatorios.");
       return;
     }
 
     setConsentError(false);
+    setSubmitError("");
     setStatus("sending");
-    // Simulated submission
-    setTimeout(() => {
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: trimmedName,
+          email: trimmedEmail,
+          phone: trimmedPhone,
+          subject: trimmedSubject,
+          message: trimmedMessage,
+          honey: formData.honey,
+        }),
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        const details =
+          typeof result.details === "string"
+            ? result.details
+            : result.details?.error?.message || result.details?.message || result.error;
+
+        const messageText =
+          typeof result.error === "string"
+            ? result.error
+            : "No se pudo enviar tu solicitud.";
+
+        throw new Error(`${messageText}${details ? `: ${details}` : ""}`);
+      }
+
       setStatus("sent");
+      setFormData({ name: "", email: "", phone: "", subject: "", honey: "" });
+      setMessage("");
+      setConsentAccepted(false);
       setTimeout(() => setStatus("idle"), 4000);
-    }, 1500);
+    } catch (error) {
+      setStatus("idle");
+      setSubmitError(error instanceof Error ? error.message : "No se pudo enviar tu solicitud.");
+    }
   };
 
   const handleVoiceToggle = async () => {
@@ -202,6 +263,8 @@ export default function Contact() {
                     required
                     className="form-input"
                     placeholder={t.contact.form.name}
+                    value={formData.name}
+                    onChange={(event) => setFormData((prev) => ({ ...prev, name: event.target.value }))}
                   />
                 </div>
                 <div>
@@ -214,6 +277,8 @@ export default function Contact() {
                     required
                     className="form-input"
                     placeholder={t.contact.form.email}
+                    value={formData.email}
+                    onChange={(event) => setFormData((prev) => ({ ...prev, email: event.target.value }))}
                   />
                 </div>
               </div>
@@ -223,10 +288,23 @@ export default function Contact() {
                 </label>
                 <input
                   id="contact-phone"
-                  type="tel"
+                  type="text"
+                  inputMode="tel"
+                  autoComplete="tel"
                   required
                   className="form-input"
                   placeholder={t.contact.form.phone}
+                  pattern="[0-9+\-()\s]{7,15}"
+                  value={formData.phone}
+                  onChange={(event) => setFormData((prev) => ({ ...prev, phone: event.target.value }))}
+                  onKeyDown={(event) => {
+                    const allowedKeys = ["Backspace", "Delete", "ArrowLeft", "ArrowRight", "Tab", "Escape", "Enter"];
+                    const isNumber = /[0-9]/.test(event.key);
+                    const isSymbol = /[+\-()\s]/.test(event.key);
+                    if (!isNumber && !isSymbol && !allowedKeys.includes(event.key)) {
+                      event.preventDefault();
+                    }
+                  }}
                 />
               </div>
               <div>
@@ -239,6 +317,8 @@ export default function Contact() {
                   required
                   className="form-input"
                   placeholder={t.contact.form.subject}
+                  value={formData.subject}
+                  onChange={(event) => setFormData((prev) => ({ ...prev, subject: event.target.value }))}
                 />
               </div>
               <div>
@@ -272,6 +352,16 @@ export default function Contact() {
                 {voiceError && <p className="mt-2 text-sm text-red-400">{voiceError}</p>}
               </div>
 
+              <input
+                type="text"
+                value={formData.honey}
+                onChange={(event) => setFormData((prev) => ({ ...prev, honey: event.target.value }))}
+                className="hidden"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+              />
+
               <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
                 {/* Si en el futuro se usa este formulario para marketing, esa finalidad debe añadirse explícitamente al texto de autorización y a la política, sin asumirla ni activarla por defecto. */}
                 <label className="flex items-start gap-3 text-sm text-muted-foreground">
@@ -300,6 +390,18 @@ export default function Contact() {
                   </p>
                 )}
               </div>
+
+              {submitError && (
+                <div className="rounded-2xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+                  {submitError}
+                </div>
+              )}
+
+              {status === "sent" && (
+                <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-300">
+                  Tu solicitud fue enviada correctamente. Nos pondremos en contacto contigo pronto.
+                </div>
+              )}
 
               <button
                 type="submit"

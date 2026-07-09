@@ -65,6 +65,10 @@ function AnimatedCounter({ target, suffix = "" }: { target: string; suffix?: str
 export default function Hero() {
   const { t, lang } = useLanguage();
   const [mounted, setMounted] = useState(false);
+  const heroStats = (Array.isArray(t?.hero?.stats) ? t.hero.stats : []) as Array<{
+    value: string;
+    label: string;
+  }>;
 
   useEffect(() => {
     setMounted(true);
@@ -173,7 +177,7 @@ export default function Hero() {
               mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
             }`}
           >
-            {t.hero.stats.map((stat, i) => (
+            {heroStats.map((stat, i) => (
               <div
                 key={i}
                 className="flex flex-col items-center gap-1 group"

@@ -3,10 +3,13 @@ import type { NextConfig } from "next";
 const isDevelopment = process.env.NODE_ENV !== "production";
 const cspValue = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDevelopment ? " 'unsafe-eval'" : ""}`,
+  isDevelopment
+    ? "script-src 'self' 'unsafe-inline' 'unsafe-eval'"
+    : "script-src 'self'",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https:",
   "font-src 'self' data:",
+  "connect-src 'self' https://api.airtable.com",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
