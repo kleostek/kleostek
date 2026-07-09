@@ -184,7 +184,7 @@ export default function Contact() {
       return;
     }
 
-    if (!window.isSecureContext) {
+    if (typeof window !== "undefined" && !window.isSecureContext) {
       setVoiceError("La nota de voz requiere una conexión segura (HTTPS o localhost). En Safari, esto suele ser necesario para funcionar correctamente.");
       return;
     }
@@ -195,17 +195,31 @@ export default function Contact() {
       return;
     }
 
-    setVoiceError("");
-    setIsListening(true);
+    setVoiceError("Se abrirá el aviso del navegador para pedir permiso al micrófono.");
 
     try {
-      if (typeof navigator !== "undefined" && navigator.mediaDevices?.getUserMedia) {
-        await navigator.mediaDevices.getUserMedia({ audio: true });
+      if (typeof navigator === "undefined" || !navigator.mediaDevices?.getUserMedia) {
+        throw new Error("microphone-not-supported");
       }
+
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      stream.getTracks().forEach((track) => track.stop());
+
+      setIsListening(true);
       recognition.start();
-    } catch {
+    } catch (error) {
       setIsListening(false);
-      setVoiceError("Debes permitir el acceso al micrófono para usar la nota de voz.");
+
+      const isPermissionBlocked = error instanceof DOMException
+        ? ["NotAllowedError", "SecurityError"].includes(error.name)
+        : false;
+
+      const message = isPermissionBlocked
+        ? "El navegador bloqueó el acceso al micrófono. Activa los permisos del sitio en la configuración del navegador y vuelve a intentarlo."
+        : error instanceof Error && error.message === "microphone-not-supported"
+          ? "Tu navegador no admite la captura de audio en este momento. Prueba en Chrome o Edge."
+          : "Debes permitir el acceso al micrófono para usar la nota de voz.";
+      setVoiceError(message);
     }
   };
 
