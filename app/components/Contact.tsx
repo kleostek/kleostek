@@ -66,7 +66,7 @@ export default function Contact() {
 
     const recognition = new SpeechRecognitionCtor();
     recognition.lang = "es-ES";
-    recognition.continuous = false;
+    recognition.continuous = true;
     recognition.interimResults = true;
     recognition.maxAlternatives = 1;
 
@@ -80,15 +80,13 @@ export default function Contact() {
       if (finalTranscript) {
         setMessage((prev) => (prev ? `${prev} ${finalTranscript}` : finalTranscript));
       }
-
-      setIsListening(false);
     };
 
     recognition.onerror = (event) => {
       setIsListening(false);
       const errorMessage =
         event.error === "not-allowed"
-          ? "Debes permitir el acceso al micrófono para usar la nota de voz."
+          ? "El navegador denegó el acceso a la voz. Permite el micrófono para este sitio y vuelve a intentarlo."
           : event.error === "network"
             ? "No se pudo conectar el servicio de voz. Revisa tu conexión e inténtalo de nuevo."
             : "No se pudo escuchar la nota de voz. Inténtalo de nuevo.";
@@ -195,31 +193,13 @@ export default function Contact() {
       return;
     }
 
-    setVoiceError("Se intentará activar el micrófono desde el navegador.");
-
     try {
-      if (typeof navigator !== "undefined" && navigator.mediaDevices?.getUserMedia) {
-        try {
-          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-          stream.getTracks().forEach((track) => track.stop());
-        } catch {
-          // Some browsers block the manual permission request; the speech recognition API can still prompt.
-        }
-      }
-
+      setVoiceError("");
       setIsListening(true);
       recognition.start();
     } catch (error) {
       setIsListening(false);
-
-      const isPermissionBlocked = error instanceof DOMException
-        ? ["NotAllowedError", "SecurityError"].includes(error.name)
-        : false;
-
-      const message = isPermissionBlocked
-        ? "El navegador bloqueó el acceso al micrófono. Activa los permisos del sitio en la configuración del navegador y vuelve a intentarlo."
-        : "Debes permitir el acceso al micrófono para usar la nota de voz.";
-      setVoiceError(message);
+      setVoiceError("No se pudo iniciar la transcripción de voz. Prueba otra vez o usa Chrome/Edge.");
     }
   };
 
