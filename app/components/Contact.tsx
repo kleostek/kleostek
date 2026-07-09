@@ -1,23 +1,151 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import Link from "next/link";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useLanguage } from "./LanguageContext";
 import { useInView } from "./useInView";
+
+type SpeechRecognitionErrorEventLike = Event & { error?: string };
+
+type SpeechRecognitionLike = {
+  lang: string;
+  continuous: boolean;
+  interimResults: boolean;
+  maxAlternatives: number;
+  onresult: ((event: { results: ArrayLike<{ isFinal: boolean; [index: number]: { transcript: string } }> }) => void) | null;
+  onerror: ((event: SpeechRecognitionErrorEventLike) => void) | null;
+  onend: (() => void) | null;
+  start: () => void;
+  stop: () => void;
+};
+
+declare global {
+  interface Window {
+    SpeechRecognition?: new () => SpeechRecognitionLike;
+    webkitSpeechRecognition?: new () => SpeechRecognitionLike;
+  }
+}
 
 export default function Contact() {
   const { t, lang } = useLanguage();
   const { ref: headerRef, isVisible: headerVisible } = useInView();
   const { ref: contentRef, isVisible: contentVisible } = useInView();
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [consentAccepted, setConsentAccepted] = useState(false);
+  const [consentError, setConsentError] = useState(false);
+  const [message, setMessage] = useState("");
+  const [isListening, setIsListening] = useState(false);
+  const [voiceError, setVoiceError] = useState("");
+  const recognitionRef = useRef<SpeechRecognitionLike | null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    if (!window.isSecureContext) {
+      setVoiceError("La nota de voz requiere una conexión segura (HTTPS o localhost). En Safari, esto suele ser necesario para funcionar correctamente.");
+      return;
+    }
+
+    const SpeechRecognitionCtor =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognitionCtor) {
+      setVoiceError("Tu navegador no admite transcripción por voz en este momento. Prueba en Chrome, Edge o Safari con permisos del micrófono activados.");
+      return;
+    }
+
+    const recognition = new SpeechRecognitionCtor();
+    recognition.lang = "es-ES";
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    recognition.maxAlternatives = 1;
+
+    recognition.onresult = (event) => {
+      const results = Array.from(event.results);
+      const finalTranscript = results
+        .filter((result) => result.isFinal)
+        .map((result) => result[0].transcript)
+        .join(" ");
+
+      if (finalTranscript) {
+        setMessage((prev) => (prev ? `${prev} ${finalTranscript}` : finalTranscript));
+      }
+
+      setIsListening(false);
+    };
+
+    recognition.onerror = (event) => {
+      setIsListening(false);
+      const errorMessage =
+        event.error === "not-allowed"
+          ? "Debes permitir el acceso al micrófono para usar la nota de voz."
+          : event.error === "network"
+            ? "No se pudo conectar el servicio de voz. Revisa tu conexión e inténtalo de nuevo."
+            : "No se pudo escuchar la nota de voz. Inténtalo de nuevo.";
+      setVoiceError(errorMessage);
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+    };
+
+    recognitionRef.current = recognition;
+
+    return () => {
+      recognition.stop();
+    };
+  }, []);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!consentAccepted) {
+      setConsentError(true);
+      return;
+    }
+
+    setConsentError(false);
     setStatus("sending");
     // Simulated submission
     setTimeout(() => {
       setStatus("sent");
       setTimeout(() => setStatus("idle"), 4000);
     }, 1500);
+  };
+
+  const handleVoiceToggle = async () => {
+    const recognition = recognitionRef.current;
+
+    if (!recognition) {
+      setVoiceError("Tu navegador no admite transcripción por voz en este momento. Prueba en Chrome, Edge o Safari con permisos del micrófono activados.");
+      return;
+    }
+
+    if (!window.isSecureContext) {
+      setVoiceError("La nota de voz requiere una conexión segura (HTTPS o localhost). En Safari, esto suele ser necesario para funcionar correctamente.");
+      return;
+    }
+
+    if (isListening) {
+      recognition.stop();
+      setIsListening(false);
+      return;
+    }
+
+    setVoiceError("");
+    setIsListening(true);
+
+    try {
+      if (typeof navigator !== "undefined" && navigator.mediaDevices?.getUserMedia) {
+        await navigator.mediaDevices.getUserMedia({ audio: true });
+      }
+      recognition.start();
+    } catch {
+      setIsListening(false);
+      setVoiceError("Debes permitir el acceso al micrófono para usar la nota de voz.");
+    }
   };
 
   return (
@@ -90,6 +218,18 @@ export default function Contact() {
                 </div>
               </div>
               <div>
+                <label htmlFor="contact-phone" className="block text-sm font-medium text-foreground mb-2">
+                  {t.contact.form.phone}
+                </label>
+                <input
+                  id="contact-phone"
+                  type="tel"
+                  required
+                  className="form-input"
+                  placeholder={t.contact.form.phone}
+                />
+              </div>
+              <div>
                 <label htmlFor="contact-subject" className="block text-sm font-medium text-foreground mb-2">
                   {t.contact.form.subject}
                 </label>
@@ -102,16 +242,63 @@ export default function Contact() {
                 />
               </div>
               <div>
-                <label htmlFor="contact-message" className="block text-sm font-medium text-foreground mb-2">
-                  {t.contact.form.message}
-                </label>
+                <div className="mb-2 flex items-center justify-between gap-3">
+                  <label htmlFor="contact-message" className="block text-sm font-medium text-foreground">
+                    {t.contact.form.message}
+                  </label>
+                  <button
+                    type="button"
+                    onClick={handleVoiceToggle}
+                    className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm transition ${isListening ? "border-red-400/40 bg-red-500/10 text-red-300" : "border-white/10 bg-white/5 text-muted-foreground hover:border-primary/40 hover:text-primary"}`}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3Z" />
+                      <path d="M19 10v1a7 7 0 0 1-14 0v-1" />
+                      <path d="M12 18v3" />
+                      <path d="M8 21h8" />
+                    </svg>
+                    {isListening ? "Escuchando..." : "Nota de voz"}
+                  </button>
+                </div>
                 <textarea
                   id="contact-message"
                   rows={5}
                   required
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
                   className="form-input resize-none"
                   placeholder={t.contact.form.message}
                 />
+                {voiceError && <p className="mt-2 text-sm text-red-400">{voiceError}</p>}
+              </div>
+
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                {/* Si en el futuro se usa este formulario para marketing, esa finalidad debe añadirse explícitamente al texto de autorización y a la política, sin asumirla ni activarla por defecto. */}
+                <label className="flex items-start gap-3 text-sm text-muted-foreground">
+                  <input
+                    type="checkbox"
+                    checked={consentAccepted}
+                    onChange={(e) => {
+                      setConsentAccepted(e.target.checked);
+                      if (e.target.checked) {
+                        setConsentError(false);
+                      }
+                    }}
+                    className="mt-1 h-4 w-4 rounded border-white/20 bg-background text-primary focus:ring-primary"
+                  />
+                  <span>
+                    He leído y acepto la{' '}
+                    <Link href="/politica-de-tratamiento-de-datos" className="font-medium text-primary underline-offset-4 hover:underline">
+                      Política de Tratamiento de Datos Personales
+                    </Link>
+                    .
+                  </span>
+                </label>
+                {consentError && (
+                  <p className="mt-2 text-sm text-red-400">
+                    Debe aceptar la política para enviar su mensaje.
+                  </p>
+                )}
               </div>
 
               <button

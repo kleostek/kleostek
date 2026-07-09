@@ -142,6 +142,7 @@ const translations = {
       form: {
         name: "Full name",
         email: "Email address",
+        phone: "Phone number",
         subject: "Subject",
         message: "Tell us about your project or the problem you want to solve",
         submit: "Send message",
@@ -300,6 +301,7 @@ const translations = {
       form: {
         name: "Nombre completo",
         email: "Correo electrónico",
+        phone: "Número de celular",
         subject: "Asunto",
         message: "Cuéntenos sobre su proyecto o el problema que quiere resolver",
         submit: "Enviar mensaje",

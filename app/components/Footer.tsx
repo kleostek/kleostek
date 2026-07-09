@@ -13,6 +13,8 @@ export default function Footer() {
     { href: "#contact", label: t.nav.contact },
   ];
 
+  const legalLinks = [{ href: "/politica-de-tratamiento-de-datos", label: "Política de Tratamiento de Datos Personales" }];
+
   const serviceLinks = t.services.items.slice(0, 4).map((s) => s.title);
 
   return (
@@ -44,6 +46,16 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3">
               {navLinks.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+              {legalLinks.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
